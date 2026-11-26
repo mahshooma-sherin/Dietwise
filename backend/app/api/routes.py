@@ -12,7 +12,7 @@ from ..services.grocery import shopping_list_csv
 from ..services.planner import PlanInputError, generate_plan
 from ..services.recipes import recipe_detail
 
-router = APIRouter(prefix="/api")
+router = APIRouter()
 _UID = re.compile(r"^[A-Za-z0-9_-]{1,64}$")
 
 
