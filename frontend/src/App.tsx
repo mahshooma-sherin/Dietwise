@@ -163,9 +163,9 @@ export default function App() {
             <ul className="saved-list">
               {saved?.map((s) => (
                 <li key={s.id} className="saved-item-wrap">
-                  <button onClick={() => loadPlan(s.id)}>
+                  <button className="saved-card-btn" onClick={() => loadPlan(s.id)}>
                     <span className="saved-title">{s.days} days for {s.people} {s.people === 1 ? "person" : "people"}</span>
-                    <span className="muted">
+                    <span className="saved-meta">
                       {s.food_preference.replace("_", "-")}, {s.nutrition_goal.replace("_", " ")} · bill {s.currency.symbol}{s.grocery_total.toFixed(2)} of {s.currency.symbol}{s.budget}
                       {s.status === "over_budget" ? " · over budget" : ""} · {new Date(s.created_at).toLocaleDateString()}
                     </span>

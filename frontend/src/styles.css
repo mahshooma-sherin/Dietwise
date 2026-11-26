@@ -148,14 +148,64 @@ thead th { background: var(--sage); font-weight: 600; } tbody th { font-weight: 
 
 .notes { margin-top: 2rem; color: var(--stone); } .notes summary { cursor: pointer; font-weight: 600; color: var(--ink); }
 .empty { background: #fff; border: 1px dashed var(--sage-2); border-radius: var(--radius); padding: 1.5rem; }
-.saved-list { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: .6rem; }
-.saved-item-wrap { display: flex; gap: .5rem; align-items: stretch; }
-.saved-item-wrap > button:first-child { flex: 1; }
-.btn-delete-saved { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 0 1rem; color: var(--stone); font-size: .85rem; cursor: pointer; white-space: nowrap; }
-.btn-delete-saved:hover { background: var(--danger-bg); border-color: #e6b8b0; color: var(--danger); }
-.saved-list button { width: 100%; text-align: left; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: .8rem 1rem; cursor: pointer; display: flex; flex-direction: column; gap: .15rem; }
-.saved-list button:hover { background: var(--sage); }
-.saved-title { font: 600 1.05rem var(--display); }
+.saved-list { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: .75rem; }
+.saved-item-wrap {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: .9rem 1.25rem;
+  transition: all 0.15s ease;
+}
+.saved-item-wrap:hover {
+  background: #f7faf6;
+  border-color: #b9c8b8;
+}
+.saved-card-btn {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+}
+.saved-title {
+  font: 700 1.2rem var(--display);
+  color: var(--ink);
+  letter-spacing: -.01em;
+}
+.saved-card-btn:hover .saved-title {
+  color: var(--leaf-dark);
+}
+.saved-meta {
+  color: var(--stone);
+  font-size: .95rem;
+  line-height: 1.4;
+}
+.btn-delete-saved {
+  flex: none;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: .35rem .85rem;
+  color: var(--stone);
+  font-size: .8rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+.btn-delete-saved:hover {
+  background: var(--danger-bg);
+  border-color: #e6b8b0;
+  color: var(--danger);
+}
 .plan-actions { display: flex; gap: .6rem; align-items: center; margin-top: .75rem; flex-wrap: wrap; }
 .btn.saved { background: var(--sage); color: var(--leaf-dark); border-color: #a8c4a4; font-weight: 600; }
 .btn.saved:hover { background: var(--sage-2); }
