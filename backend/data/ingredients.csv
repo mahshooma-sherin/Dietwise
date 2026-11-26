@@ -1,0 +1,74 @@
+id,name,category,kcal,protein,carbs,fat,fiber,price_usd_kg,diet,allergens,piece_g,pack_g
+rice,Rice,Grains & cereals,360,7,79,0.6,1.3,1.6,vegan,,,500
+rice_flour,Rice flour,Grains & cereals,366,6,80,1.4,2.4,2.2,vegan,,,500
+wheat_flour,Wheat flour,Grains & cereals,360,12,73,1.5,3,1.0,vegan,gluten,,500
+semolina,Semolina (rava),Grains & cereals,360,13,73,1,4,1.6,vegan,gluten,,500
+poha,Flattened rice (poha),Grains & cereals,360,6.5,77,1,2,2.5,vegan,,,500
+oats,Rolled oats,Grains & cereals,380,13,67,7,10,3.0,vegan,gluten,,500
+pasta,Pasta,Grains & cereals,360,13,72,1.5,3,2.0,vegan,gluten,,500
+noodles,Rice noodles,Grains & cereals,360,6,80,0.6,1,3.0,vegan,,,400
+couscous,Couscous,Grains & cereals,360,13,73,1.5,5,2.5,vegan,gluten,,500
+quinoa,Quinoa,Grains & cereals,370,14,64,6,7,6.0,vegan,,,500
+bread,Whole wheat bread,Grains & cereals,250,10,43,3.5,7,3.0,vegan,gluten,35,400
+tortilla,Wheat tortilla,Grains & cereals,310,8,50,8,3,4.0,vegan,gluten,45,360
+lentils_red,Red lentils,Protein,350,25,60,1.5,11,3.0,vegan,,,500
+moong_dal,Moong dal,Protein,347,24,63,1.2,16,3.0,vegan,,,500
+chickpeas,Chickpeas (dry),Protein,360,19,61,6,17,2.5,vegan,,,500
+black_beans,Black beans (dry),Protein,340,21,62,1.4,16,2.5,vegan,,,500
+kidney_beans,Kidney beans (dry),Protein,330,24,60,1,25,3.0,vegan,,,500
+tofu,Tofu,Protein,76,8,1.9,4.8,0.3,5.0,vegan,soy,,400
+chicken,Chicken breast,Protein,120,22.5,0,2.6,0,7.0,non_veg,,,500
+ground_beef,Ground beef,Protein,250,18,0,20,0,10.0,non_veg,,,400
+fish,White fish fillet,Protein,100,20,0,2,0,12.0,non_veg,fish,,400
+shrimp,Shrimp,Protein,85,18,0.2,1,0,15.0,non_veg,shellfish,,300
+peanuts,Peanuts,Nuts & seeds,567,26,16,49,8.5,5.0,vegan,peanut,,250
+almonds,Almonds,Nuts & seeds,579,21,22,50,12.5,12.0,vegan,tree_nut,,200
+tahini,Tahini,Nuts & seeds,595,17,21,54,9,9.0,vegan,sesame,,250
+egg,Eggs,Dairy & eggs,143,12.6,0.7,9.5,0,4.5,vegetarian,egg,50,300
+milk,Milk,Dairy & eggs,61,3.2,4.8,3.3,0,1.1,vegetarian,dairy,,1000
+yogurt,Yogurt,Dairy & eggs,61,3.5,4.7,3.3,0,2.5,vegetarian,dairy,,500
+paneer,Paneer,Dairy & eggs,300,18,3.5,23,0,9.0,vegetarian,dairy,,200
+cheese,Cheese,Dairy & eggs,350,24,2,28,0,9.0,vegetarian,dairy,,200
+onion,Onion,Vegetables,40,1.1,9.3,0.1,1.7,1.2,vegan,,110,500
+tomato,Tomato,Vegetables,18,0.9,3.9,0.2,1.2,2.5,vegan,,120,500
+potato,Potato,Vegetables,77,2,17,0.1,2.2,1.2,vegan,,170,500
+carrot,Carrot,Vegetables,41,0.9,9.6,0.2,2.8,1.3,vegan,,70,500
+spinach,Spinach,Vegetables,23,2.9,3.6,0.4,2.2,4.0,vegan,,,250
+cabbage,Cabbage,Vegetables,25,1.3,5.8,0.1,2.5,1.2,vegan,,,500
+cauliflower,Cauliflower,Vegetables,25,1.9,5,0.3,2,2.5,vegan,,,500
+bell_pepper,Bell pepper,Vegetables,26,1,6,0.3,2,4.0,vegan,,150,150
+cucumber,Cucumber,Vegetables,15,0.7,3.6,0.1,0.5,2.0,vegan,,200,200
+broccoli,Broccoli,Vegetables,34,2.8,7,0.4,2.6,3.5,vegan,,,350
+eggplant,Eggplant,Vegetables,25,1,6,0.2,3,2.5,vegan,,,300
+zucchini,Zucchini,Vegetables,17,1.2,3.1,0.3,1,2.5,vegan,,,300
+green_beans,Green beans,Vegetables,31,1.8,7,0.2,2.7,3.5,vegan,,,250
+mushroom,Mushrooms,Vegetables,22,3.1,3.3,0.3,1,6.0,vegan,,,250
+cassava,Cassava,Vegetables,160,1.4,38,0.3,1.8,1.2,vegan,,,500
+corn,Sweet corn,Vegetables,86,3.3,19,1.4,2.7,2.5,vegan,,,500
+peas,Green peas,Vegetables,81,5,14,0.4,5,2.5,vegan,,,500
+ginger,Ginger,Vegetables,80,1.8,18,0.8,2,5.0,vegan,,,100
+garlic,Garlic,Vegetables,149,6.4,33,0.5,2.1,6.0,vegan,,40,100
+green_chili,Green chili,Vegetables,40,2,9,0.2,1.5,5.0,vegan,,,100
+banana,Banana,Fruits,89,1.1,23,0.3,2.6,1.2,vegan,,120,360
+apple,Apple,Fruits,52,0.3,14,0.2,2.4,2.5,vegan,,180,360
+avocado,Avocado,Fruits,160,2,9,15,7,6.0,vegan,,170,170
+lemon,Lemon,Fruits,29,1.1,9,0.3,2.8,3.0,vegan,,60,240
+oil,Cooking oil,Pantry & oils,884,0,0,100,0,2.8,vegan,,,500
+olive_oil,Olive oil,Pantry & oils,884,0,0,100,0,8.0,vegan,,,500
+sugar,Sugar,Pantry & oils,387,0,100,0,0,1.2,vegan,,,500
+salt,Salt,Pantry & oils,0,0,0,0,0,0.6,vegan,,,500
+soy_sauce,Soy sauce,Pantry & oils,53,8,5,0.6,0.8,3.0,vegan,soy;gluten,,250
+tomato_sauce,Tomato sauce (passata),Pantry & oils,32,1.6,6,0.2,1.5,2.0,vegan,,,500
+coconut_milk,Coconut milk,Pantry & oils,197,2,3.3,21,0,3.5,vegan,,,400
+coconut,Grated coconut,Pantry & oils,354,3.3,15,33,9,3.0,vegan,,,200
+turmeric,Turmeric,Spices & herbs,312,10,67,3,22,8.0,vegan,,,50
+chili_powder,Chili powder,Spices & herbs,282,12,50,14,35,8.0,vegan,,,50
+cumin,Cumin,Spices & herbs,375,18,44,22,11,12.0,vegan,,,50
+garam_masala,Garam masala,Spices & herbs,330,10,50,15,20,15.0,vegan,,,50
+black_pepper,Black pepper,Spices & herbs,251,10,64,3.3,25,20.0,vegan,,,50
+mustard_seeds,Mustard seeds,Spices & herbs,508,26,28,36,12,6.0,vegan,mustard,,50
+curry_leaves,Curry leaves,Spices & herbs,108,6,19,1,6.4,15.0,vegan,,,20
+italian_herbs,Dried Italian herbs,Spices & herbs,265,9,69,4,43,20.0,vegan,,,30
+fresh_herbs,Fresh herbs (parsley/cilantro),Spices & herbs,36,3,6.3,0.8,3.3,12.0,vegan,,,50
+urad_dal,Urad dal (black gram),Protein,341,25,59,1.6,18,3.5,vegan,,,500
+besan,Besan (chickpea flour),Grains & cereals,387,22,58,7,11,2.5,vegan,,,500
