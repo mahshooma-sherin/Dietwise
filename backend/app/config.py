@@ -8,8 +8,20 @@ load_dotenv(BASE_DIR / ".env")
 load_dotenv(BASE_DIR.parent / ".env")
 
 DATA_DIR = Path(os.getenv("DIETWISE_DATA_DIR", BASE_DIR / "data"))
-DB_PATH = os.getenv("DIETWISE_DB", str(BASE_DIR / "dietwise.db"))
-CORS_ORIGINS = [o.strip() for o in os.getenv("CORS_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173").split(",") if o.strip()]
+
+# In serverless environments (like Vercel or AWS Lambda), current dir is read-only. Fallback to /tmp.
+def _resolve_db_path() -> str:
+    env_db = os.getenv("DIETWISE_DB")
+    if env_db:
+        return env_db
+    if os.getenv("VERCEL") or not os.access(BASE_DIR, os.W_OK):
+        return "/tmp/dietwise.db"
+    return str(BASE_DIR / "dietwise.db")
+
+DB_PATH = _resolve_db_path()
+
+_default_cors = "http://localhost:5173,http://127.0.0.1:5173,https://dietwise-q4zh.vercel.app"
+CORS_ORIGINS = [o.strip() for o in os.getenv("CORS_ORIGINS", _default_cors).split(",") if o.strip()]
 
 # Recommender: weights of each score component (see ml/recommender.py)
 WEIGHTS = {"similarity": 0.30, "goal": 0.30, "time": 0.05, "cost": 0.10, "pantry": 0.10, "cuisine": 0.25}
