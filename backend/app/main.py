@@ -4,6 +4,7 @@ from pathlib import Path
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 
 from . import config, db
@@ -23,10 +24,25 @@ app = FastAPI(title="DietWise API", version="1.0.0", lifespan=lifespan)
 # Handle Vercel serverless path rewrites
 @app.middleware("http")
 async def vercel_path_rewrite(request: Request, call_next):
-    matched = request.headers.get("x-matched-path")
-    if matched and request.scope.get("path") in ("/api/index.py", "/api/index"):
-        request.scope["path"] = matched
+    # Detect the real requested path forwarded by Vercel
+    for header in ("x-invoke-path", "x-forwarded-uri", "x-original-uri", "x-matched-path"):
+        val = request.headers.get(header)
+        if val and val not in ("/api/index.py", "/api/index"):
+            request.scope["path"] = val.split("?")[0]
+            break
     return await call_next(request)
+
+@app.exception_handler(404)
+async def custom_404(request: Request, exc):
+    return JSONResponse(
+        status_code=404,
+        content={
+            "detail": "Not Found",
+            "scope_path": request.scope.get("path"),
+            "url": str(request.url),
+            "headers": {k: v for k, v in request.headers.items() if not k.startswith("x-vercel-sc-")},
+        },
+    )
 
 app.add_middleware(
     CORSMiddleware,
