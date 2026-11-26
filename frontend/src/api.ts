@@ -50,7 +50,9 @@ export const api = {
   meta: () => request<Meta>("/api/meta"),
   generate: (body: PlanRequest) => request<Plan>("/api/meal-plans/generate", { method: "POST", body: JSON.stringify(body) }),
   plan: (id: string) => request<Plan>(`/api/meal-plans/${id}`),
-  plans: () => request<PlanSummary[]>("/api/meal-plans"),
+  plans: (savedOnly = false) => request<PlanSummary[]>(`/api/meal-plans${savedOnly ? "?saved=true" : ""}`),
+  savePlan: (id: string) => request<{ status: string; id: string }>(`/api/meal-plans/${id}/save`, { method: "POST" }),
+  unsavePlan: (id: string) => request<{ status: string; id: string }>(`/api/meal-plans/${id}/save`, { method: "DELETE" }),
   recipe: (id: string, servings: number, currency: string, priceLevel: number) =>
     request<RecipeDetail>(`/api/recipes/${id}?servings=${servings}&currency=${currency}&price_level=${priceLevel}`),
   feedback: (planId: string, recipe_id: string, rating: Rating) =>

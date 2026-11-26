@@ -74,6 +74,7 @@ export interface Plan {
   id: string;
   created_at: string;
   status: "ok" | "over_budget";
+  is_saved?: boolean;
   warnings: string[];
   suggestions: string[];
   notes: string[];
@@ -112,6 +113,7 @@ export interface PlanSummary {
   food_preference: string;
   nutrition_goal: string;
   grocery_total: number;
+  is_saved?: boolean;
 }
 
 export interface RecipeDetail {

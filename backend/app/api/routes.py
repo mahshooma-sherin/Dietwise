@@ -49,13 +49,33 @@ def generate(req: PlanRequest, x_user_id: str | None = Header(default=None)):
         plan = generate_plan(req, feedback=db.get_feedback(uid))
     except PlanInputError as e:
         raise HTTPException(422, {"message": "Could not build a plan.", "errors": e.errors})
-    db.save_plan(uid, plan)
+    db.save_plan(uid, plan, is_saved=False)
     return plan
 
 
 @router.get("/meal-plans")
-def list_plans(x_user_id: str | None = Header(default=None)):
-    return db.list_plans(_user(x_user_id))
+def list_plans(saved: bool = False, x_user_id: str | None = Header(default=None)):
+    return db.list_plans(_user(x_user_id), saved_only=saved)
+
+
+@router.post("/meal-plans/{plan_id}/save")
+def save_plan_endpoint(plan_id: str, x_user_id: str | None = Header(default=None)):
+    uid = _user(x_user_id)
+    plan = db.get_plan(plan_id)
+    if not plan:
+        raise HTTPException(404, "Meal plan not found.")
+    db.mark_saved(uid, plan_id, is_saved=True)
+    return {"status": "saved", "id": plan_id}
+
+
+@router.delete("/meal-plans/{plan_id}/save")
+def unsave_plan_endpoint(plan_id: str, x_user_id: str | None = Header(default=None)):
+    uid = _user(x_user_id)
+    plan = db.get_plan(plan_id)
+    if not plan:
+        raise HTTPException(404, "Meal plan not found.")
+    db.mark_saved(uid, plan_id, is_saved=False)
+    return {"status": "unsaved", "id": plan_id}
 
 
 @router.get("/meal-plans/{plan_id}")

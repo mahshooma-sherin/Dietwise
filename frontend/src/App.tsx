@@ -15,6 +15,14 @@ export default function App() {
   const [ratings, setRatings] = useState<Record<string, Rating>>({});
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<ApiError | null>(null);
+  const [savedIds, setSavedIds] = useState<Set<string>>(() => {
+    try {
+      const stored = localStorage.getItem("dietwise:saved_plan_ids");
+      return new Set(stored ? JSON.parse(stored) : []);
+    } catch {
+      return new Set();
+    }
+  });
 
   useEffect(() => {
     api.meta().then(setMeta).catch((e: ApiError) => setMetaError(e.message));
@@ -36,11 +44,34 @@ export default function App() {
     }
   }, []);
 
+  const toggleSavePlan = async (planId: string) => {
+    const isSaved = savedIds.has(planId);
+    const next = new Set(savedIds);
+    if (isSaved) {
+      next.delete(planId);
+      api.unsavePlan(planId).catch(() => undefined);
+    } else {
+      next.add(planId);
+      api.savePlan(planId).catch(() => undefined);
+    }
+    setSavedIds(next);
+    try {
+      localStorage.setItem("dietwise:saved_plan_ids", JSON.stringify([...next]));
+    } catch {
+      /* ignore */
+    }
+    if (view === "saved") {
+      setSaved((prev) => (prev ? prev.filter((p) => next.has(p.id)) : prev));
+    }
+  };
+
   const openSaved = async () => {
     setView("saved");
     setSaved(null);
     try {
-      setSaved(await api.plans());
+      const all = await api.plans(false);
+      const filtered = all.filter((s) => s.is_saved || savedIds.has(s.id));
+      setSaved(filtered);
     } catch {
       setSaved([]);
     }
@@ -107,7 +138,17 @@ export default function App() {
           meta ? <PlanForm meta={meta} busy={busy} error={error} onSubmit={generate} /> : !metaError && <p className="muted">Loading options…</p>
         )}
 
-        {view === "plan" && plan && <PlanView plan={plan} ratings={ratings} onRate={rate} onNew={() => setView("form")} />}
+        {view === "plan" && plan && (
+          <PlanView
+            plan={plan}
+            ratings={ratings}
+            isSaved={savedIds.has(plan.id)}
+            onRate={rate}
+            onNew={() => setView("form")}
+            onToggleSave={toggleSavePlan}
+            onOpenSaved={openSaved}
+          />
+        )}
 
         {view === "saved" && (
           <section className="narrow">
@@ -115,19 +156,29 @@ export default function App() {
             {saved === null && <p className="muted">Loading…</p>}
             {saved?.length === 0 && (
               <div className="empty">
-                <p>No saved plans yet. Every plan you build is saved on this device's profile automatically.</p>
+                <p>No saved plans yet. When you generate a meal plan that you like, click <strong>"★ Save Plan"</strong> to keep it here!</p>
                 <button className="btn primary" onClick={() => setView("form")}>Build a plan</button>
               </div>
             )}
             <ul className="saved-list">
               {saved?.map((s) => (
-                <li key={s.id}>
+                <li key={s.id} className="saved-item-wrap">
                   <button onClick={() => loadPlan(s.id)}>
                     <span className="saved-title">{s.days} days for {s.people} {s.people === 1 ? "person" : "people"}</span>
                     <span className="muted">
                       {s.food_preference.replace("_", "-")}, {s.nutrition_goal.replace("_", " ")} · bill {s.currency.symbol}{s.grocery_total.toFixed(2)} of {s.currency.symbol}{s.budget}
                       {s.status === "over_budget" ? " · over budget" : ""} · {new Date(s.created_at).toLocaleDateString()}
                     </span>
+                  </button>
+                  <button
+                    className="btn-delete-saved"
+                    title="Remove from saved plans"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleSavePlan(s.id);
+                    }}
+                  >
+                    Remove
                   </button>
                 </li>
               ))}

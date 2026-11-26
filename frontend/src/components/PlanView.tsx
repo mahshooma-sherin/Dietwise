@@ -9,11 +9,14 @@ type Tab = "meals" | "shopping" | "nutrition";
 interface Props {
   plan: Plan;
   ratings: Record<string, Rating>;
+  isSaved?: boolean;
   onRate: (planId: string, recipeId: string, rating: Rating) => void;
   onNew: () => void;
+  onToggleSave?: (planId: string) => void;
+  onOpenSaved?: () => void;
 }
 
-export default function PlanView({ plan, ratings, onRate, onNew }: Props) {
+export default function PlanView({ plan, ratings, isSaved = false, onRate, onNew, onToggleSave, onOpenSaved }: Props) {
   const [tab, setTab] = useState<Tab>("meals");
   const s = plan.summary;
   const sym = plan.currency.symbol;
@@ -28,6 +31,16 @@ export default function PlanView({ plan, ratings, onRate, onNew }: Props) {
             {s.distinct_dishes} different dishes across {s.total_meals} meals
             {s.cuisine_match_pct !== null ? ` · ${s.cuisine_match_pct}% from your preferred cuisine` : ""}
           </p>
+          <div className="plan-actions">
+            <button
+              className={`btn ${isSaved ? "saved" : "primary"}`}
+              onClick={() => onToggleSave?.(plan.id)}
+              aria-label={isSaved ? "Saved to your meal plans" : "Save this meal plan"}
+            >
+              {isSaved ? "✓ Plan Saved" : "★ Save Plan"}
+            </button>
+            <button className="btn" onClick={onNew}>New plan</button>
+          </div>
         </div>
         <div className={`budget-card ${over ? "over" : ""}`} role="status">
           <span className="muted">Shopping bill</span>
@@ -36,6 +49,16 @@ export default function PlanView({ plan, ratings, onRate, onNew }: Props) {
           <div className="meter" aria-hidden="true"><i style={{ width: `${Math.min(100, s.budget_used_pct)}%` }} /></div>
         </div>
       </div>
+
+      {isSaved ? (
+        <div className="banner info" role="status">
+          ✓ This plan is saved to your {onOpenSaved ? <button className="link-btn" onClick={onOpenSaved}>Saved plans</button> : <strong>Saved plans</strong>}.
+        </div>
+      ) : (
+        <p className="muted small-print" style={{ margin: ".3rem 0 .8rem" }}>
+          Happy with this meal prep? Click <strong>★ Save Plan</strong> above to keep it in your Saved plans.
+        </p>
+      )}
 
       {over && (
         <div className="banner warn" role="alert">
